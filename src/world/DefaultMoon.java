@@ -1,6 +1,7 @@
 package world ;
 import util.Coordinates ;
 import util.Pair ;
+import gui.Textures ;
 
 import java.util.ArrayList ;
 
@@ -182,8 +183,8 @@ public class DefaultMoon extends CelestialBody{
         ArrayList< Pair< Integer,ArrayList<Integer> >> a = new ArrayList<>() ;  // Declare the elevation initialising list 
         ArrayList<Integer> moon_rock = new ArrayList<>() ;                      // Declare layers
 
-        moon_rock.add(8) ;                                                      // Initialise layer sprites 
-        moon_rock.add(9) ;                                                 
+        moon_rock.add(Textures.moonCrater) ;                                                      // Initialise layer sprites 
+        moon_rock.add(Textures.moonRock) ;                                                 
         
         a.add(new Pair<Integer,ArrayList<Integer>>(20,moon_rock)) ;             // Initialise layer elevation 
     

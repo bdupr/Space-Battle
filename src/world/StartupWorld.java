@@ -1,6 +1,7 @@
 package world ;
 
 import gui.Config ;
+import gui.Textures ;
 
 public class StartupWorld {
     private Config configuration ; 
@@ -29,8 +30,14 @@ public class StartupWorld {
     public int getDy(){ return dy ; }
 
     public void update(){
+        
         startup_planet = configuration.planet ;
         startup_moon = configuration.moon ;
+        
+        for(int i = 0; i < startup_grid.length; i++)
+        	for( int j = 0; j < startup_grid[i].length; j++ ) 
+        		startup_grid[i][j] = Textures.spacePlaceholder  ;
+        
         updateCelestialBody(startup_planet) ;
         updateCelestialBody(startup_moon) ;
     }
@@ -42,11 +49,11 @@ public class StartupWorld {
      */
     private void drawSurface(CelestialBody cb, int x0, int y0, int x, int y){ 
         for(int i = -x; i < x ; i++){           //  Draw the surface between x0-x and x0+x for the y0-y section
-            startup_grid[x0+i][y0+y] = 1 ;
+            startup_grid[x0+i][y0+y] = Textures.landPlaceholer ;
         }
         if(y != 0){         // So long as we are not on the "equator", prevents section from being drawn twice
             for(int i = -x; i < x ; i++){       //  Draw the surface between x0-x and x0+x for the y0-y section
-                startup_grid[x0+i][y0-y] = 1 ;
+                startup_grid[x0+i][y0-y] = Textures.landPlaceholer ;
             }
         }
     }

@@ -3,21 +3,20 @@ package entities.structure ;
 import util.* ; 
 import world.World ;
 import entities.agents.* ;
+import gui.Textures; 
 
 public class Base extends Structure{
-    public int sprite ;    
 
     private int crystal_stock ;
     private int energy_stock ;
 
     private int eng_tick ;
     
-    public Base(Coordinates _coordinates, World _world, int _team_id){
-        super(_coordinates,_world,_team_id,700,0,0) ;
+    public Base(Coordinates coordinates, World world, int team_id){
+        super(coordinates,world,team_id,Textures.blueBase,700,0,0) ;
         
-        sprite = 32 ; // Décide du sprite selon l'équipe
         if(this.getTeamId() == 1 )
-            sprite = 36 ;
+            sprite = Textures.redBase ;
 
         crystal_stock = 0 ;
         energy_stock = 0 ;

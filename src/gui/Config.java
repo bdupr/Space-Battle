@@ -14,8 +14,14 @@ public class Config{
     public DefaultPlanet planet ;
     public DefaultMoon moon ;
 
-    public int world_lenght ;  
-    public int world_height ;  
+    public final static int WORLD_LENGTH = 120 ;  
+    public final static int WORLD_HEIGHT = 100 ;
+    
+    public final static int MIN_PLANET_RADIUS = 30;
+    public final static int MAX_PLANET_RADIUS =  ( WORLD_HEIGHT / 2 ) - 1 ; 
+     
+    public final static int MIN_SIZE_MOON = 10; 
+    public final static int MAX_SIZE_MOON = MIN_PLANET_RADIUS ;    
     
     public int planet_radius ; 
     public int planet_rotation_frequency ; 
@@ -25,8 +31,6 @@ public class Config{
     public int moon_orbit_frequency ;
 
     public Config(){
-        world_lenght = 120 ;
-        world_height = 100 ;
 
         // Default planet configuration  
         planet_radius  = 25 ; 
@@ -38,10 +42,10 @@ public class Config{
         moon_orbit_frequency = 2 ;  
 
         // Default program configuration
-        planet = new DefaultPlanet(planet_radius, world_lenght/2, world_height/2, planet_rotation_frequency ) ;
+        planet = new DefaultPlanet(planet_radius, WORLD_LENGTH/2, WORLD_HEIGHT/2, planet_rotation_frequency ) ;
         moon  = new DefaultMoon(planet, moon_radius, moon_distance_from_planet, moon_orbit_frequency ) ;
 
-        world = new World(world_lenght, world_height, planet, moon, 2) ;
+        world = new World(WORLD_LENGTH, WORLD_HEIGHT, planet, moon, 2) ;
 
     }
 
@@ -66,18 +70,18 @@ public class Config{
         moon.setOrbitFrequency(new_frequency) ;
     }
 
-    public void modifiedPlanet(){
-        planet = new DefaultPlanet(planet_radius, world_lenght/2, world_height/2, planet_rotation_frequency ) ;
+    public void modifyPlanet(){
+        planet = new DefaultPlanet(planet_radius, WORLD_LENGTH/2, WORLD_HEIGHT/2, planet_rotation_frequency ) ;
     }
-    public void modifiedMoon(){
+    public void modifyMoon(){
         moon  = new DefaultMoon(planet, moon_radius, moon_distance_from_planet, moon_orbit_frequency ) ;
     }
     
     // Confirm a new configuration 
     public void submit(){
-        modifiedPlanet() ;
-        modifiedMoon() ;
-        world = new World(world_lenght, world_height, planet, moon, 2) ;
+        modifyPlanet() ;
+        modifyMoon() ;
+        world = new World(WORLD_LENGTH, WORLD_HEIGHT, planet, moon, 2) ;
     }
 
 }

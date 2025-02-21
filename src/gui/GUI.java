@@ -149,7 +149,7 @@ public class GUI extends JFrame {
 
         this.setFocusable(true);
         this.requestFocusInWindow();
-        this.setResizable(false) ; // Prevents the user from resizing the window 
+        this.setResizable(true) ; // Prevents the user from resizing the window 
         this.setVisible(true);
     }
     

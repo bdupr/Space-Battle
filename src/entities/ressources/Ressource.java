@@ -12,13 +12,13 @@ public abstract class Ressource extends Entity{
     public int quantity ;
     public boolean is_visible ;
     
-    public Ressource(Coordinates _coordinates, int _quantity){
-        super(_coordinates) ;
+    public Ressource(Coordinates coordinates, int sprite, int quantity){
+        super(coordinates,sprite) ;
 
         ressource_number++ ;
         r_id = ressource_number ;
 
-        quantity = _quantity ;
+        this.quantity = quantity ;
         is_visible = false ; 
     }
 

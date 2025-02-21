@@ -1,5 +1,10 @@
 import java.awt.Graphics;
 import java.lang.Object ;
+import javax.swing.SwingUtilities ;
+import javax.swing.Timer ;
+import java.awt.event.ActionListener ;
+import java.awt.event.ActionEvent ;
+
 import world.* ;
 import gui.* ;
 import entities.* ;
@@ -17,7 +22,6 @@ public class Main{
                 make moon orbit modifiable 
             Finish planet
                 add checkbounds method 
-                Add spherical rotaion
                 multiple direction rotation for planet (unlikely)
             Different world variants
                 planet without moons variant
@@ -31,7 +35,6 @@ public class Main{
             Catastophies
                 volcanoes throw up smoke in the atmosphere
         Gui
-            Make surface surface panel( instance in gui)
             Menu to select world type
             Global/Local view
             Move around world in local view 
@@ -56,13 +59,31 @@ public class Main{
             Random in between range :
                 min + (int)(Math.random() * ((max-min) + 1 )) ;
             Empty method :
-                throw new UnsupportedOperationException("Unimplemented method 'move'");    
+                throw new UnsupportedOperationException("Unimplemented method 'move'");
+            
+            
+            In order : 
+            	Finish the configuration options
+            		moon size 
+            		moon position
+            		planet size 
+            		moon orbit speed 
+            		moon distance from planet
+            		planet rotation speed 
+            		impose limits based on the whole planetary systems
+            	resizeing cb doesn't create a new instance
+            		make CelestialBody have a initSurface method
+            		make a resizable state 
+            		make some startup celestial bodys with differrent initialisations 
+            	figure out the window to panel size discrepency
+            		still doesn't work
+            	parlell processing of sprites, figure out how to synchronize the program better with  java swings edt thread 
     */
 
     public static void main(String[] args){
         
         int WINDOW_SIZE_X = 1400;
-        int WINDOW_SIZE_Y = 907;
+        int WINDOW_SIZE_Y = 847;
         int SPRITE_SIZE = 8 ;  
 
         int dx = 120 ; 
@@ -77,146 +98,68 @@ public class Main{
         
         int red_team = 0 ;
         int blue_team = 1 ;
-
+	
         //world.teams.get(blue_team).add(new Engineer(new Coordinates((int)(Math.random() * dx), (int)(Math.random() * dy)), world,blue_team));
         //world.teams.get(red_team).add(new Factory(new Coordinates(21,10), world,red_team));
  
         //world.teams.get(blue_team).add(new Factory(new Coordinates(dx-2,dy-20), world,blue_team));
         //SurfacePanel est une ressource temporaire pour les test, possiblité de l'intégrer à l'affichage 
-        GUI gui = new GUI(new SpritePanel(world, SPRITE_SIZE), WINDOW_SIZE_X, WINDOW_SIZE_Y, new SurfacePanel(planet.getSurface(), SPRITE_SIZE), new ConfigPanel()) ;
         
+        GUI gui = new GUI(new SpritePanel(world, SPRITE_SIZE), WINDOW_SIZE_X, WINDOW_SIZE_Y, new SurfacePanel(planet.getSurface(), SPRITE_SIZE), new ConfigPanel()) ;
+
+        Timer programTimer = new Timer(20,new ActionListener (){
+		@Override
+		public void actionPerformed( ActionEvent e){
+			world.step();
+			gui.repaint();
+		}
+        }) ;
+         
+        Timer startupTimer = new Timer(20,new ActionListener (){
+		@Override
+		public void actionPerformed( ActionEvent e){
+			if( gui.getInitStatus()){
+				((Timer)(e.getSource())).stop() ;
+				programTimer.start() ; 
+			}
+			gui.getStartupWorld().update() ;
+            		gui.repaint() ;
+		}
+        }) ;
+        
+        System.out.println("Height : "+gui.getHeight()) ;
+        System.out.println("Width : "+gui.getWidth()) ;
+        
+        startupTimer.start() ;
+        
+        /*
         while( !gui.getInitStatus() ){
             gui.getStartupWorld().update() ;
             gui.repaint() ;
-            try { Thread.sleep(100) ;} 
+            try { Thread.sleep(33) ;} 
             catch (Exception e) {}
         }
+        int delay = 0 ;
+        int iteration = 10000;
         
-        int delay = 20 ;
-        int iteration = 10000; 
         while( iteration != 0 ){
-            
-            world.step();
-            gui.repaint();
-            iteration--;
-
-
+		world.step();
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
+    				public void run() {
+        				gui.repaint();
+    				}
+			});
+		} catch (Exception e ){
+			e.printStackTrace() ;
+		}
+		iteration--;
+		
             try { Thread.sleep(delay) ;} 
             catch (Exception e) {}
         }
+        */
+        
     
-    }
-
-    
-    
+    }   
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

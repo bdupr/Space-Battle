@@ -3,18 +3,17 @@ package entities.structure ;
 import util.* ; 
 import world.World ;
 import entities.agents.* ;
+import gui.Textures;
 
 public class Factory extends Structure{
 
-    public int sprite ; 
     private int forge_tick ;   
 
-    public Factory(Coordinates _coordinates,World _world,int _team_id){
-        super(_coordinates, _world,_team_id,350,5,5) ;
+    public Factory(Coordinates coordinates,World world,int team_id){
+        super(coordinates, world,team_id,Textures.blueFactory,350,5,5) ;
         
-        sprite = 35 ; 
         if(this.getTeamId() == 1 )
-            sprite = 39 ;
+            sprite = Textures.redFactory ;
 
         forge_tick = -1 ;
     }

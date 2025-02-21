@@ -2,19 +2,18 @@ package entities.structure ;
 
 import util.* ; 
 import world.World ;
+import gui.Textures;
 
 public class Extractor extends Structure{
 
-    public int sprite ;
     
     private int extract_tick ;     
 
-    public Extractor(Coordinates _coordinates, World _world,int _team_id){
-        super(_coordinates, _world, _team_id,200,5,5) ;
+    public Extractor(Coordinates coordinates, World world,int team_id){
+        super(coordinates, world, team_id,Textures.blueExtractor, 200,5,5) ;
         
-        sprite = 34 ;
         if(this.getTeamId() == 1 )
-            sprite = 38 ;
+            sprite = Textures.redExtractor ;
 
         extract_tick = - 1 ; 
     }

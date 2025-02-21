@@ -4,6 +4,7 @@ import entities.* ;
 import entities.structure.* ;
 import util.* ;
 import world.World ;
+import gui.Textures ;
 
 public class ShieldSoldier extends Agent{
 
@@ -16,17 +17,20 @@ public class ShieldSoldier extends Agent{
 
     private int team_color ;
 
-    public ShieldSoldier(Coordinates _coordinates, World _world,int _team_id){
-        super(_coordinates, _world,_team_id,0,70,5,5) ;
+    public ShieldSoldier(Coordinates coordinates, World world,int team_id){
+        super(coordinates, world,team_id,Textures.blueSoldierE,0,70,5,5) ;
         
         target = null ; 
         detection_range = 12 ;
 
         power = 70 ;
         power_max = 70 ;
-        team_color = 0 ;
-        if(this.getTeamId() == 1 )
-            team_color = 8 ;
+        team_color = Textures.blueSoldierE;
+        if(this.getTeamId() == 1 ){
+        	team_color = Textures.redSoldierE ;
+        	sprite = Textures.redSoldierE ;
+        }
+          
 
         shooting_tick = -1 ;
         shield_tick = -1 ;
@@ -38,23 +42,23 @@ public class ShieldSoldier extends Agent{
     public void setSprite(){ // sets the orientation of the agent as well as its direction
         //setting the direction based on an int makes it easier to find the corresponding sprite in SpriteDisplay without parsing an array to compare coordinates         
         //Will probably change in the future
-        
+        sprite = team_color ;
         if(direction.equals(new Coordinates(1,0)))
-            sprite = 0 + team_color;
+            sprite += 0;
         else if (direction.equals(new Coordinates(1,1)))
-            sprite = 1 + team_color;
+            sprite += 1;
         else if (direction.equals(new Coordinates(0,1)))
-            sprite = 2 + team_color;
+            sprite += 2 ;
         else if (direction.equals(new Coordinates(-1,1)))
-            sprite = 3 + team_color;
+            sprite += 3;
         else if (direction.equals(new Coordinates(-1,0)))
-            sprite = 4 + team_color;
+            sprite += 4;
         else if (direction.equals(new Coordinates(-1,-1)))
-            sprite = 5 + team_color;
+            sprite += 5;
         else if (direction.equals(new Coordinates(0,-1)))
-            sprite = 6 + team_color;
+            sprite += 6;
         else 
-            sprite = 7 + team_color;
+            sprite += 7;
 
     }
 

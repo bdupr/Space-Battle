@@ -1,6 +1,7 @@
 package world ;
 import entities.ressources.* ;
 import util.Pair ;
+import gui.Textures ;
 
 import java.util.ArrayList ;
 
@@ -114,7 +115,7 @@ public class CelestialBodySurface{
     public void defaultElevation(){
         ArrayList< Pair< Integer,ArrayList<Integer> >> a = new ArrayList<>() ;  // Declare the initialising list 
         ArrayList<Integer> default_sprite = new ArrayList<>() ;                 // Default sprite set
-        default_sprite.add(1) ;                                                     
+        default_sprite.add(Textures.water) ;                                                     
 
         a.add(new Pair<Integer,ArrayList<Integer>>(20,default_sprite)) ;        // One sprite for all 20 layers    
 
@@ -134,6 +135,6 @@ public class CelestialBodySurface{
         for(int i = 0; i < dx ; i++)
             for (int j = 0 ; j < dy ; j++ )
                 if( i < dx/2 - section_diameter[j] || i > dx/2+1 + section_diameter[j])
-                    surface_grid[i][j][0] = 0 ;
+                    surface_grid[i][j][0] = Textures.missing ;
     }
 }

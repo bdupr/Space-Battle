@@ -15,7 +15,6 @@ public abstract class Agent extends Entity{
     
     protected World world ;  
     private int team_id ;
-    protected int sprite ;
 
     protected Coordinates destination ;
     protected Coordinates direction ; 
@@ -24,23 +23,23 @@ public abstract class Agent extends Entity{
     public int crystal_cost ;
     public int energy_cost ;
     
-    public Agent(Coordinates _coordinates, World _world, int _team_id ,int init_sprite, int _health, int _crystal_cost, int _energy_cost){
+    public Agent(Coordinates coordinates, World world, int team_id , int sprite, int init_sprite, int health, int crystal_cost, int energy_cost){
         
-        super(_coordinates) ;
+        super(coordinates,sprite) ;
         
         agent_number++ ;
         a_id = agent_number ;
         
-        world = _world ;
-        team_id = _team_id ;
+        this.world = world ;
+        this.team_id = team_id ;
         sprite = init_sprite ; 
 
         destination = coordinates.clone() ;
         direction = new Coordinates(0,0) ; 
         
-        health = _health ;
-        crystal_cost = _crystal_cost ;
-        energy_cost = _energy_cost ;
+        this.health = health ;
+        this.crystal_cost = crystal_cost ;
+        this.energy_cost = energy_cost ;
     }
 
     @Override

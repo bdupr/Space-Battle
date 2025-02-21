@@ -3,6 +3,7 @@ package entities ;
 import util.* ;
 import entities.agents.* ;
 import entities.structure.* ;
+import gui.Textures ;
 
 public class Projectile extends Entity{
 
@@ -18,19 +19,19 @@ public class Projectile extends Entity{
     private int speed ; 
     private boolean expired ;
     
-    public Projectile(Entity _origin,int _team_id, int _damage, int _speed){
+    public Projectile(Entity origin,int team_id, int damage, int speed){
         
-        super(_origin.getCoordinates().clone()) ;
+        super(origin.getCoordinates().clone(),Textures.projectile) ;
     
         projectile_number++ ;
         p_id = projectile_number ;
         
-        origin = _origin ; 
-        team_id = _team_id ;
+        this.origin = origin ; 
+        this.team_id = team_id ;
         initTarget() ;
         
-        damage = _damage ;
-        speed = _speed ; 
+        this.damage = damage ;
+        this.speed = speed ; 
         expired = false ;
     }
 

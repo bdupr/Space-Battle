@@ -4,21 +4,19 @@ import util.* ;
 import world.World ;
 import entities.* ;
 import entities.agents.* ;
+import gui.Textures ;
 
 public class Turret extends Structure{
-
-    public int sprite ;
     
     private Entity target ;
     private int detection_range ;
     private int shooting_tick ; 
 
-    public Turret(Coordinates _coordinates,World _world,int _team_id){
-        super(_coordinates, _world,_team_id, 175,5,5) ;
+    public Turret(Coordinates coordinates,World world,int team_id){
+        super(coordinates, world,team_id,Textures.blueTurret, 175,5,5) ;
        
-        sprite = 33 ;
         if(this.getTeamId() == 1 )
-            sprite = 37 ;
+            sprite = Textures.redTurret ;
 
         target = null ;
         detection_range = 15 ;

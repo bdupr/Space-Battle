@@ -1,9 +1,11 @@
 package world ;
+
 import util.* ;
 import entities.* ; 
 import entities.ressources.* ;
 import entities.structure.* ; 
 import entities.agents.* ;
+import gui.Textures ;
 
 import java.util.ArrayList ;
 
@@ -61,8 +63,8 @@ public class World{
 
         for(int i = 0; i < dx ; i++)
             for(int j = 0 ; j < dy ; j++ ){
-                world_grid[i][j][0] = Math.random() < 0.95 ? 4 : 5 ;
-                world_grid[i][j][1] = 0 ; 
+                world_grid[i][j][0] = Math.random() < 0.95 ? Textures.emptySpace : Textures.starySpace ;
+                world_grid[i][j][1] = Textures.missing ; 
             }                
 
         initAsteroidBelt(1.5,80) ; // 1.5
@@ -101,8 +103,8 @@ public class World{
         //Clear celestial bodies and ressources each step 
         for(int i = 0; i < dx ; i++){
             for(int j = 0 ; j < dy ; j++ ){
-                world_grid[i][j][1] = 0 ;
-                world_grid[i][j][2] = 0 ;
+                world_grid[i][j][1] = Textures.missing ;
+                world_grid[i][j][2] = Textures.missing ;
             }
         }
 
@@ -445,7 +447,7 @@ public class World{
                         weight = Math.max(weight, Math.exp(current_coord.distanceFrom(corner)/max_distance) ) ; // weight ~ [1,3]
 
                     if(Math.random() < (weight - 2) * density)                      // Control the density of asteroids 
-                        world_grid[i][j][0] = (int)(10 + Math.random() * ((12-10) + 1)) ; // Randomly assign one of the different asteroid sprites 
+                        world_grid[i][j][0] = (int)(Textures.asteroid1 + Math.random() * ((Textures.asteroid3 - Textures.asteroid1) + 1)) ; // Randomly assign one of the different asteroid sprites 
                 }
             }
         }

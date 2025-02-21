@@ -1,6 +1,7 @@
 package world ;
 import util.Coordinates ;
 import util.Pair ;
+import gui.Textures ;
 
 import java.util.ArrayList ;
 
@@ -132,11 +133,11 @@ public class DefaultPlanet extends CelestialBody{
         ArrayList<Integer> mountain_rock = new ArrayList<>() ;
         ArrayList<Integer> mountain_peaks = new ArrayList<>() ;
 
-        ocean.add(1);                                                           // Initialise layer sprites 
-        land.add(2);
-        land.add(3);
-        mountain_rock.add(6);
-        mountain_peaks.add(7);                                                   
+        ocean.add(Textures.water);                                                           // Initialise layer sprites 
+        land.add(Textures.grass);
+        land.add(Textures.tree);
+        mountain_rock.add(Textures.stone);
+        mountain_peaks.add(Textures.mountain);                                                   
         
         a.add(new Pair<Integer,ArrayList<Integer>>(9,ocean)) ;                  // Initialise layer elevation 
         a.add(new Pair<Integer,ArrayList<Integer>>(12,land)) ;
